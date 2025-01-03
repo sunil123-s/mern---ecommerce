@@ -32,8 +32,11 @@ const HeaderRight = () => {
   return (
     <div className="flex lg:items-center lg:flex-row flex-col gap-4">
       <Sheet open={openCart} onOpenChange={() => setopenCart(false)}>
-        <Button onClick={() => setopenCart(true)} variant="outline" size="icon">
+        <Button onClick={() => setopenCart(true)} variant="outline" size="icon" className="relative">
           <ShoppingCart className="w-6 h-6" />
+          <span className="absolute top-[-2px] right-[2px] font-bold text-sm text-red-700">
+            {cartItems?.items?.length || 0}
+          </span>
           <span className="sr-only">user cart</span>
         </Button>
         <CartStructure
