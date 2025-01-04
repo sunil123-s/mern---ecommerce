@@ -45,19 +45,19 @@ const Address = () => {
     }
 
       if(currentid !== null) {
-        dispatch(updateAddress({userId:user?.id, addressId:currentid, formData}))
+        dispatch(updateAddress({user, addressId:currentid, formData}))
         .then((data) => {
            if(data.payload.success){
-            dispatch(fetchAddress(user?.id))
+            dispatch(fetchAddress(user))
             toast.success("Address Updated")
             setformData(initialAddress)
             setcurrentid(null)
            } 
         })
       }else{
-        dispatch(AddNewAddress({ userId: user?.id, ...formData })).then((data) => {
+        dispatch(AddNewAddress({ userId: user?.id, ...formData, userToken:user?.token })).then((data) => {
           if (data.payload.success) {
-            dispatch(fetchAddress(user?.id));
+            dispatch(fetchAddress(user));
             toast.success("Address Added");
           }
         });
@@ -66,12 +66,12 @@ const Address = () => {
 
 
   useEffect(() => {
-    dispatch(fetchAddress(user?.id));
+    dispatch(fetchAddress(user));
   }, [dispatch]);
 
   return (
     <Card>
-      <div className="mb-5 p-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
+      <div className="mb-5 p-3 grid grid-cols-1 sm:grid-cols-2 gap-2 ">
         {addressList && addressList.length > 0
           ? addressList?.map((addressItem) => (
               <AddressCard

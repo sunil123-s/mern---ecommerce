@@ -25,7 +25,7 @@ const HeaderRight = () => {
   }
 
   useEffect(() => {
-    dispatch(fetchCartItems({userId:user?.id}))
+    dispatch(fetchCartItems(user))
   }, [dispatch])
   
 

@@ -5,9 +5,15 @@ export const AddNewAddress = createAsyncThunk(
     "address/AddNewAddress",
     async(formData) => {
         try {
+           const { userToken, ...data } = formData;
           const res = await axios.post(
             `${import.meta.env.VITE_BACKEND_API_URL}/api/address/add`,
-            formData
+            data,
+            {
+              headers: {
+                Authorization: `Bearer ${userToken}`,
+              },
+            }
           );
           return res.data
         } catch (error) {
@@ -18,10 +24,15 @@ export const AddNewAddress = createAsyncThunk(
 
 export const fetchAddress = createAsyncThunk(
   "address/fetchAddress",
-  async (userId) => {
+  async (user) => {
     try {
       const res = await axios.get(
-        `${import.meta.env.VITE_BACKEND_API_URL}/api/address/${userId}`
+        `${import.meta.env.VITE_BACKEND_API_URL}/api/address/${user?.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${user?.token}`,
+          },
+        }
       );
       return res.data;
     } catch (error) {
@@ -32,11 +43,16 @@ export const fetchAddress = createAsyncThunk(
 
 export const updateAddress = createAsyncThunk(
   "address/updateAddress",
-  async ({formData, userId, addressId}) => {
+  async ({formData, user, addressId}) => {
     try {
       const res = await axios.put(
-        `${import.meta.env.VITE_BACKEND_API_URL}/api/address/edit/${userId}/${addressId}`,
-        formData
+        `${import.meta.env.VITE_BACKEND_API_URL}/api/address/edit/${user?.id}/${addressId}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${user?.token}`,
+          },
+        }
       );
       return res.data;
     } catch (error) {
@@ -47,10 +63,15 @@ export const updateAddress = createAsyncThunk(
 
 export const deleteAddress = createAsyncThunk(
   "address/deleteAddress",
-  async ({userId, addressId}) => {              
+  async ({user, addressId}) => {              
     try {
       const res = await axios.delete(
-        `${import.meta.env.VITE_BACKEND_API_URL}/api/address/delete/${userId}/${addressId}`
+        `${import.meta.env.VITE_BACKEND_API_URL}/api/address/delete/${user?.id}/${addressId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${user?.token}`,
+          },
+        }
       );
       return res.data;
     } catch (error) {

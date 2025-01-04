@@ -21,10 +21,10 @@ const ProductDetialDailog = ({open,setopen,productDetails}) => {
 
      const handelCartId = (CartItemId) => {
        dispatch(
-         AddtoCart({ userId: user?.id, productId:CartItemId, quantity: 1 })
+         AddtoCart({user, productId:CartItemId, quantity: 1 })
        ).then((data) => {
          if (data.payload.success) {
-           dispatch(fetchCartItems({ userId: user?.id }));
+           dispatch(fetchCartItems(user));
            toast.success("Product Add To Cart");
          }
        });  
@@ -49,7 +49,7 @@ const ProductDetialDailog = ({open,setopen,productDetails}) => {
 
     useEffect(() => {
       if(productDetails?._id){
-        dispatch(fetchReview(productDetails?._id))
+        dispatch(fetchReview({productId:productDetails?._id, user}))
       }
     }, [dispatch, productDetails?._id])
     

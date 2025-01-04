@@ -12,10 +12,10 @@ const AddressCard = ({ addressInfo, handelEditAddress }) => {
   const dispatch = useDispatch();
 
   const handelAddressDelete = (addressId) => {
-    dispatch(deleteAddress({ userId: user?.id, addressId })).then((data) => {
+    dispatch(deleteAddress({user, addressId })).then((data) => {
       if (data.payload.success) {
         toast.success("Address Deleted");
-        dispatch(fetchAddress(user?.id));
+        dispatch(fetchAddress(user));
       }
     });
   };
@@ -26,7 +26,7 @@ const AddressCard = ({ addressInfo, handelEditAddress }) => {
   }
 
   return (
-    <Card className="">
+    <Card className="hover:shadow-2xl transition-shadow">
       <CardContent
         className="grid gap-4 p-4 cursor-pointer"
         onClick={() => handelSelcetAddress(addressInfo)}

@@ -17,7 +17,6 @@ import { brandIcon } from "@/utils/DummyData/AddProductsData";
 import { AddtoCart, fetchCartItems } from "@/store/Thunk/Publics/CartThunk";
 import toast from "react-hot-toast";
 import ProductDetialDailog from "../PorductListing/ProductDetial";
-import { Skeleton } from "@/components/ui/skeleton";
 import SkeletonCard from "@/pages/common/SkeletonCard";
 
 const Home = () => {
@@ -61,10 +60,10 @@ const Home = () => {
 
     const handelCartId = (CartItemId) => {
       dispatch(
-        AddtoCart({ userId: user?.id, productId: CartItemId, quantity: 1 })
+        AddtoCart({ user, productId: CartItemId, quantity: 1 })
       ).then((data) => {
         if (data.payload.success) {
-          dispatch(fetchCartItems({ userId: user?.id }));
+          dispatch(fetchCartItems(user));
           toast.success("Product Add To Cart");
         }
       });
@@ -140,7 +139,11 @@ const handelProductDetails = (getpordcutdetailsId) => {
                 onClick={() => handelnavigatetoListing(item, "brand")}
               >
                 <CardContent className="flex flex-col items-center justify-center p-6">
-                  <item.icon className="w-12 h-12 mb-4 text-primary" />
+                  <img
+                    src={item?.icon}
+                    className="w-12 h-12 mb-4 text-primary"
+                    alt=""
+                  />
                   <span className="font-bold">
                     {item.label.charAt(0).toUpperCase() + item.label.slice(1)}
                   </span>
@@ -155,7 +158,7 @@ const handelProductDetails = (getpordcutdetailsId) => {
           <h2 className="text-3xl font-bold text-center mb-8">
             Feature Product
           </h2>
-          {isLoading && <SkeletonCard/>}
+          {isLoading && <SkeletonCard />}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {!isLoading && products && products.length > 0
               ? products.map((productItem) => (

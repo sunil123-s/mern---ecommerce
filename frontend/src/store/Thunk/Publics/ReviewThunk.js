@@ -4,11 +4,15 @@ import axios from "axios";
 
 export const AddReview = createAsyncThunk(
   "review/addReview",
-  async ({ productId, userId, name, reviewMessage }) => {
+  async ({ productId, userId, name, reviewMessage,userToken }) => {
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_BACKEND_API_URL}/api/review/addrating`,
-        { productId, userId, name, reviewMessage }
+        { productId, userId, name, reviewMessage },{
+          headers:{
+            Authorization: `Bearer ${userToken}`
+          }
+        }
       );
       return res.data;
     } catch (error) {
@@ -19,12 +23,16 @@ export const AddReview = createAsyncThunk(
 
 export const fetchReview = createAsyncThunk(
   "review/fetchReview",
-  async (productId) => {
+  async ({productId,user}) => {
     try {
       const res = await axios.get(
-        `${import.meta.env.VITE_BACKEND_API_URL}/api/review/getrating/${productId}`
+        `${import.meta.env.VITE_BACKEND_API_URL}/api/review/getrating/${productId}`,{
+          headers: {
+            Authorization : `Bearer ${user.token}`
+          }
+        }
       );
-      console.log(res.data, ":res.data");
+
       return res.data;
     } catch (error) {
       console.log(error);

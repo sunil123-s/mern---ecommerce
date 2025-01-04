@@ -57,10 +57,10 @@ const Listing = () => {
   }
     
   const handelCartId = (CartItemId) => {
-    dispatch(AddtoCart({userId:user?.id, productId:CartItemId, quantity:1}))
+    dispatch(AddtoCart({user, productId:CartItemId, quantity:1}))
     .then((data) => {
       if(data.payload.success) {
-        dispatch(fetchCartItems({userId:user?.id}))
+        dispatch(fetchCartItems(user))
         toast.success('Product Add To Cart')
       }
     })

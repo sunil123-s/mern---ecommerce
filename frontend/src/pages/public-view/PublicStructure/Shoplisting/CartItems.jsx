@@ -12,7 +12,7 @@ const CartItemsContend = ({cartItems}) => {
   const dispatch = useDispatch();
 
   const handelCartDelete = (ItemId) => {
-      dispatch(deleteCart({ userId:user?.id, productId:ItemId }))
+      dispatch(deleteCart({ user, productId:ItemId }))
       .then((data) => {
         if(data.payload.success){
           toast.success("Product Removed")
@@ -26,7 +26,7 @@ const CartItemsContend = ({cartItems}) => {
       if(action === "plus"){toast.success("item added")}
       else{toast.success("item removed")}
 
-    dispatch(updateCart({userId:user?.id, productId:getcartItems?.productId, quantity:quantityCheck}))
+    dispatch(updateCart({user, productId:getcartItems?.productId, quantity:quantityCheck}))
     
   }
 

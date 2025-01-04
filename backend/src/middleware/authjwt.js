@@ -1,10 +1,9 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import User from "../models/User";
+import User from "../model/User.js"
 
 dotenv.config();
 const jwt_secret = process.env.JWT_SECRET;
-if (!jwt_secret) return console.log("jwt is not provided");
 
 export const ProtectedRoute = async (req, res, next) => {
   try {

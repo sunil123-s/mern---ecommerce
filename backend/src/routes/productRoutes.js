@@ -7,13 +7,19 @@ import {
   deleteProduct,
 } from "../controller/admin/productController.js";
 import upload from "../util/cloudinaryImage.js";
+import { ProtectedRoute } from "../middleware/authjwt.js";
 
 const router = express.Router();
 
-router.post("/productImg", upload.single("productFile"), handelImageUpload);
-router.post("/addProduct", AddNewProduct);
-router.get("/allproducts", AllProducts)
-router.put("/updateproduct/:id", editProducts)
-router.delete("/deleteProduct/:id", deleteProduct);
+router.post(
+  "/productImg",
+  ProtectedRoute,
+  upload.single("productFile"),
+  handelImageUpload
+);
+router.post("/addProduct", ProtectedRoute, AddNewProduct);
+router.get("/allproducts", ProtectedRoute, AllProducts);
+router.put("/updateproduct/:id", ProtectedRoute, editProducts);
+router.delete("/deleteProduct/:id", ProtectedRoute, deleteProduct);
 
 export default router;

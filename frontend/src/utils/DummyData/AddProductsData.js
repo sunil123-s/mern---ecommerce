@@ -1,10 +1,9 @@
-import {
-  BabyIcon,
-  CloudLightningIcon,
-  ShirtIcon,
-  UmbrellaIcon,
-  WatchIcon,
-} from "lucide-react";
+import {BabyIcon,CloudLightningIcon,ShirtIcon,UmbrellaIcon,WatchIcon} from "lucide-react";
+import adidas from "../../assets/adidas2.jpg";
+import nike from "../../assets/nike.jpg";
+import zara from "../../assets/zara.jpg";
+import handm from "../../assets/h&m.jpg";
+import puma from "../../assets/puma.webp";
 
 export const addProductsdata = [
   {
@@ -154,11 +153,11 @@ export const categoryIcons = [
 ];
 
 export const brandIcon = [
-  { id: "nike", label: "nike", icon: ShirtIcon },
-  { id: "adidas", label: "adidas", icon: CloudLightningIcon },
-  { id: "puma", label: "puma", icon: BabyIcon },
-  { id: "zara", label: "zara", icon: WatchIcon },
-  { id: "h&m", label: "h&m", icon: UmbrellaIcon },
+  { id: "nike", label: "nike", icon: nike },
+  { id: "adidas", label: "adidas", icon: adidas },
+  { id: "puma", label: "puma", icon: puma },
+  { id: "zara", label: "zara", icon: zara },
+  { id: "h&m", label: "h&m", icon: handm },
 ];
 
 export const addressFormControls = [
