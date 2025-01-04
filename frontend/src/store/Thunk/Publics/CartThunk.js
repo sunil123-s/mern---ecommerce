@@ -7,7 +7,7 @@ export const AddtoCart = createAsyncThunk(
     try {
       const { id, token } = user;
       const res = await axios.post(
-        "http://localhost:8000/api/cart/add",
+        `${import.meta.env.VITE_BACKEND_API_URL}/api/cart/add`,
         {
           userId: id,
           productId,
@@ -31,7 +31,7 @@ export const fetchCartItems = createAsyncThunk(
   async (user) => {
     try {
       const res = await axios.get(
-        `http://localhost:8000/api/cart/${user?.id}`,
+        `${import.meta.env.VITE_BACKEND_API_URL}/api/cart/${user?.id}`,
         {
           headers: {
             Authorization: `Bearer ${user?.token}`,
@@ -50,7 +50,7 @@ export const updateCart = createAsyncThunk(
   async ({ user, productId, quantity }) => {
     const { id, token } = user;
     const res = await axios.put(
-      "http://localhost:8000/api/cart/updatecart",
+      `${import.meta.env.VITE_BACKEND_API_URL}/api/cart/updatecart`,
       {
         userId: id,
         productId,
@@ -70,7 +70,7 @@ export const deleteCart = createAsyncThunk(
   "cart/ deleteCart",
   async ({ user, productId }) => {
     const res = await axios.delete(
-      `http://localhost:8000/api/cart/${user?.id}/${productId}`,
+      `${import.meta.env.VITE_BACKEND_API_URL}/api/cart/${user?.id}/${productId}`,
       {
         headers: {
           Authorization: `Bearer ${user?.token}`,
