@@ -79,7 +79,7 @@ const handelProductDetails = (getpordcutdetailsId) => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="relative w-full h-[900px] overflow-hidden">
+      <div className="relative w-full lg:h-[900px] md:h-[600px] h-[350px] overflow-hidden">
         {slides.map((slide, index) => (
           <img
             src={slide}
@@ -93,7 +93,7 @@ const handelProductDetails = (getpordcutdetailsId) => {
         <Button
           variant="outline"
           size="icon"
-          className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white z-20"
+          className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white z-20 hidden"
           onClick={prevSlide}
         >
           <ChevronLeftIcon className="w-4 h-4" />
@@ -101,7 +101,7 @@ const handelProductDetails = (getpordcutdetailsId) => {
         <Button
           variant="outline"
           size="icon"
-          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white z-20"
+          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white z-20 hidden"
           onClick={nextSlide}
         >
           <ChevronRightIcon className="w-4 h-4" />

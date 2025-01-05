@@ -13,8 +13,11 @@ import ProductDetialDailog from "./ProductDetial";
 import { AddtoCart, fetchCartItems } from "@/store/Thunk/Publics/CartThunk";
 import toast from "react-hot-toast";
 import SkeletonCard from "@/pages/common/SkeletonCard";
+import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
+import { Menu } from "lucide-react";
 
 const Listing = () => {
+  const [openFilter, setopenFilter] = useState(false)
   const [filter, setfilter] = useState({})
   const [sort, setsort] = useState(null)
   const [dailogOpen, setdailogOpen] = useState(false)
@@ -103,13 +106,27 @@ const Listing = () => {
     
   
   return (
-    <div className="relative top-20 grid grid-cols-1 md:grid-cols-[300px_1fr] gap-6 p-4 md:p-6">
-      <ProductFilter filter={filter} handelFilter={handelFilter}/>
+    <div className="relative top-20 grid grid-cols-1 md:grid-cols-[300px_1fr] gap-6 p-4 md:p-6 ">
+      <Sheet open={openFilter} onOpenChange={() => setopenFilter(!openFilter)}>
+        <SheetTrigger asChild>
+          <Button variant="outline" size="icon" className="md:hidden fixed left-6 z-20">
+            <Menu className="h-6 w-6" />
+          </Button>
+        </SheetTrigger>
+        <SheetContent side="left" className="w-full max-w-xs">
+          <ProductFilter filter={filter} handelFilter={handelFilter} />
+        </SheetContent>
+      </Sheet>
+      <div className="hidden md:block">
+        <ProductFilter filter={filter} handelFilter={handelFilter} />
+      </div>
       <div className="bg-background w-full rounded-lg shadow-sm">
-        <div className="fixed top-16 left-80 right-3 p-4 border-b flex items-center justify-between bg-white z-10"> 
-          <h2 className="text-lg font-extrabold mr-2 ">All Products</h2>
+        <div className="fixed top-16 left-0 right-0 md:left-80 md:right-3 p-4 border-b flex items-center justify-between bg-white z-10">
+          <h2 className="text-lg font-extrabold mr-2 ml-16">All Products</h2>
           <div className="flex items-center gap-3">
-            <span className="text-muted-foreground">{products.length} Products</span>
+            <span className="text-muted-foreground">
+              {products.length} Products
+            </span>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
@@ -124,24 +141,31 @@ const Listing = () => {
               <DropdownMenuContent align="end" className="w-[200px]">
                 <DropdownMenuRadioGroup value={sort} onValueChange={handleSort}>
                   {sortOptions.map((sort) => (
-                    <DropdownMenuRadioItem
-                      value={sort.id}
-                      key={sort.id}
-                    >{sort.label}</DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value={sort.id} key={sort.id}>
+                      {sort.label}
+                    </DropdownMenuRadioItem>
                   ))}
                 </DropdownMenuRadioGroup>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
         </div>
-        {isLoading && <SkeletonCard/>}
-         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 lg:grid-cols-4 mt-10 mb-32">
-           {!isLoading && (products.map(singleItem => <ProductCard
-           handelCartId={handelCartId} 
-           handelProductDetails={handelProductDetails} 
-           product={singleItem}/>))}
-         </div>
-          <ProductDetialDailog open={dailogOpen} setopen={setdailogOpen} productDetails={productDetails}/>
+        {isLoading && <SkeletonCard />}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 lg:grid-cols-4 mt-10 mb-32">
+          {!isLoading &&
+            products.map((singleItem) => (
+              <ProductCard
+                handelCartId={handelCartId}
+                handelProductDetails={handelProductDetails}
+                product={singleItem}
+              />
+            ))}
+        </div>
+        <ProductDetialDailog
+          open={dailogOpen}
+          setopen={setdailogOpen}
+          productDetails={productDetails}
+        />
       </div>
     </div>
   );

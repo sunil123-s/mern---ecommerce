@@ -1,12 +1,14 @@
+
 import { Label } from "@/components/ui/label"
 import { filterOptions } from "@/utils/DummyData/AddProductsData"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Separator } from "@/components/ui/separator"
 
 const ProductFilter = ({filter, handelFilter}) => {
+
   return (
     <div className="bg-background rounded-lg shadow-sm">
-       <div className="p-4 border-b fixed top-20">
+       <div className="p-4 border-b fixed top-20 z-20 bg-white rounded-md">
          <h2 className="text-lg font-semibold">
             Filters
          </h2>
