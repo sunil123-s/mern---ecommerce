@@ -109,7 +109,7 @@ const Listing = () => {
     <div className="relative top-20 grid grid-cols-1 md:grid-cols-[300px_1fr] gap-6 p-4 md:p-6 ">
       <Sheet open={openFilter} onOpenChange={() => setopenFilter(!openFilter)}>
         <SheetTrigger asChild>
-          <Button variant="outline" size="icon" className="md:hidden fixed left-6 z-20">
+          <Button variant="outline" size="icon" className="md:hidden fixed left-6  z-20">
             <Menu className="h-6 w-6" />
           </Button>
         </SheetTrigger>
