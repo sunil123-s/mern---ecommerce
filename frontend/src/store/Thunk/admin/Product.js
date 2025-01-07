@@ -59,7 +59,7 @@ import axios from "axios";
 
     export const deleteProduct = createAsyncThunk(
       "delete/deleteProduct",
-      async (id,user) => {
+      async ({id,user}) => {
         try {
           const res = await axios.delete(
             `${import.meta.env.VITE_BACKEND_API_URL}/api/admin/deleteProduct/${id}`,

@@ -37,11 +37,11 @@ const ProductDetialDailog = ({open,setopen,productDetails}) => {
     
     const handelReview = (productId ) => {
         dispatch(
-          AddReview({productId,userId: user?.id,name: user?.name,reviewMessage,}))
+          AddReview({productId,userId: user?.id,name: user?.name,reviewMessage,userToken:user?.token}))
           .then((data) => {
           if(data.payload.success){
             toast.success("Thanks for review")
-            dispatch(fetchReview(productId));
+            dispatch(fetchReview({productId,user}));
             setreviewMessage("")
           }
         });

@@ -13,6 +13,11 @@ export const Signup = async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
+
+   if(!name || !email || !password) {
+      return res.status(500).json({ error: "requried all Filed" });
+   }
+
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
@@ -44,7 +49,6 @@ export const Signup = async (req, res) => {
       },
     });
 
-    res.status(200).json({ success: true, message: "account created " });
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, message: "failed to Sign Up" });
@@ -58,7 +62,7 @@ export const Login = async (req, res) => {
     const existingUser = await User.findOne({ email });
 
     if (!existingUser) {
-      return res.status(500).json({ error: "user doesn't exits" });
+      return res.status(500).json({ error: "User doesn't exist." });
     }
 
     const vaildPassword = await bcrypt.compare(password, existingUser.password);

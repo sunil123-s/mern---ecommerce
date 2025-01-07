@@ -10,7 +10,7 @@ const AdminPorductList = ({ product, seteditProduct, isOpen, setformdata }) => {
   const dispatch = useDispatch();
 
   const handleDelete = async (id) => {
-    dispatch(deleteProduct(id)).then((data) => {
+    dispatch(deleteProduct({id,user})).then((data) => {
       if (data.payload.success) {
         dispatch(fetchAllProducts(user));
         toast.success("Product Deleted");

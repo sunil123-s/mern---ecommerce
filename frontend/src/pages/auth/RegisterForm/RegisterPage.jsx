@@ -33,9 +33,9 @@ const RegisterPage = () => {
       );
       localStorage.setItem("authToken", JSON.stringify(res.data.user))
       navigate("/shop/home")
-      toast.success("Register successfully")
+       toast.success(isSignup ? "Registered successfully" : "Logged in successfully");
     } catch(error) {  
-      toast.error(error.response.data)
+      toast.error(error.response.data.error)
       console.error("Error during registration:",error);
     }
   };
